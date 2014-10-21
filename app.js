@@ -625,16 +625,8 @@ function processRequest(req, res, next) {
             } else if (locations[k] == 'body') {
                 bodyParams[k] = v;
             } else {
-                // URL params are contained within "{param}"
-                var regx = new RegExp('{' + k + '}');
-
-                // If the param is actually a part of the URL, put it in the URL
-                if (!!regx.test(methodURL)) {
-                    methodURL = methodURL.replace(regx, v);
-                } else {
-                    // Stores param in params to later put into the query
-                    params[k] = v;
-                }
+                // Stores param in params to later put into the query
+                params[k] = v;
             }
         }
     }

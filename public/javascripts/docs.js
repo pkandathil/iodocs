@@ -181,6 +181,26 @@
     
     // $.('#access_token').val(foo);
 
+    function set_path_parameters(form){
+        var path = $(form).children('input[name=fullPath]').val();
+        var locations = JSON.parse($(form).children('input[name=locations]').val());
+        var json = JSON.parse($(form).children('input[name=json]').val());
+        var query_parameters = [];
+        for (var form_field in locations) {
+            if (locations[form_field] === 'path') {
+                if(path.indexOf("{" + form_field + "}") >= 0){
+                    path = path.replace("{" + form_field + "}", json[form_field]);
+                    delete json[form_field];
+                    delete locations[form_field];
+                    console.log(json);
+                }
+            }
+        }
+        $(form).children('input[name=json]').val(JSON.stringify(json));
+        $(form).children('input[name=locations]').val(JSON.stringify(locations));
+
+        return path;
+    }
 
     /*
         Try it! button. Submits the method params, apikey and secret if any, and apiName
@@ -189,6 +209,8 @@
         var self = this;
 
         event.preventDefault();
+
+        $(this).find('input[name=fullPath]').val(set_path_parameters(self));
 
         var params = $(this).serializeArray(),
             apiKey = { name: 'apiKey', value: $('input[name=key]').val() },
