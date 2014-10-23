@@ -102,6 +102,8 @@ block content
                               input(type='hidden', name='json', id=methodKey + 'json')
                               input(type='hidden', name='locations', id=methodKey + 'locations')
                               - var path = apiInfo.basePath
+                              - if (typeof(apiInfo.publicPath) !== 'undefined')
+                                - path += apiInfo.publicPath
                               - if (typeof(apiInfo.privatePath) !== 'undefined')
                                 - path += apiInfo.privatePath
                               - if (typeof(method.path) !== 'undefined')

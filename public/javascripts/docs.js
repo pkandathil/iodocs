@@ -192,7 +192,6 @@
                     path = path.replace("{" + form_field + "}", json[form_field]);
                     delete json[form_field];
                     delete locations[form_field];
-                    console.log(json);
                 }
             }
         }
