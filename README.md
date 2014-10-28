@@ -424,6 +424,60 @@ For the Rdio API test, beta access to their new API is necessary.
 The site for the beta API is: "http://www.rdio.com/developers/"
 
 
+### Example #4 - Parameters in the base url
+```js
+
+{
+    "name": "Lower Case API",
+    "description": "An example api.",
+    "protocol": "rest",
+    "basePath": "http://api.{your_domain_name}.sample.com",
+    "publicPath": "/v{version_number}",
+    "resources": {
+        "Resource Group A": {
+            "methods": {
+                "MethodA1": {
+                    "name": "Method A1",
+                    "path": "/a1/grab",
+                    "httpMethod": "GET",
+                    "description": "Grabs information from the A1 data set.",
+                    "parameters": {
+                        "your_domain_name": {
+                            "type": "string",
+                            "required": true,
+                            "default": "",
+                            "description": "Domain name",
+                            "location": "path"
+                        },
+                        "version_number": {
+                            "type": "string",
+                            "required": true,
+                            "default": "",
+                            "description": "version number",
+                            "location": "path"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+Line:
+
+1. "name" key value is a string that holds the name
+    of the API that is used in the Jade template output. Also true in *apiconfig.json*.
+
+2. "protocol" key value is either *rest* or *soap*
+
+3. "basePath" key value is the host path of the API calls.
+
+4. "publicPath" key value is the full path prefix prepended
+    to all method URIs. This value often includes the version
+    in RESTful APIs.
+ 
+5. "location" (optional) key value set to 'path'. The variable entered by the user is substituted into the path of the api
+
 
 API-LEVEL CONFIG DETAILS
 ========================
